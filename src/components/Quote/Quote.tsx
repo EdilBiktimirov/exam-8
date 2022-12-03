@@ -1,5 +1,5 @@
 import React, {MouseEventHandler} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 interface Props {
   text: string;
@@ -8,10 +8,7 @@ interface Props {
   onDeleteBtnClick: MouseEventHandler;
 }
 
-
 const Quote: React.FC<Props> = ({text, author, id, onDeleteBtnClick}) => {
-
-
 
   return (
     <div className="card p-3 mb-2 shadow-sm d-flex justify-content-between flex-row">
@@ -20,8 +17,14 @@ const Quote: React.FC<Props> = ({text, author, id, onDeleteBtnClick}) => {
         <p><span className="fw-bold">Author: </span>{author}</p>
       </div>
       <div className="d-flex flex-column">
-        <Link to={"/quotes/" + id + "/edit"} className="btn btn-info mb-2">Edit</Link>
-        <button  className="btn btn-danger " onClick={onDeleteBtnClick}>Delete</button></div>
+        <Link
+          to={"/quotes/" + id + "/edit"}
+          className="btn btn-info mb-2">Edit</Link>
+        <button
+          className="btn btn-danger"
+          onClick={onDeleteBtnClick}>Delete
+        </button>
+      </div>
     </div>
   );
 };

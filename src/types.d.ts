@@ -3,7 +3,6 @@ export interface QuoteType {
   author: string;
   category: string;
   id: string
-
 }
 
 export interface QuotesType {

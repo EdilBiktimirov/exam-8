@@ -1,18 +1,13 @@
-import React, {ReactEventHandler, useState} from 'react';
-import Quotes from "../Quotes/Quotes";
-import {QuoteType} from "../../types";
-import {useNavigate, useParams} from "react-router-dom";
-import Quote from "../Quote/Quote";
+import React, {useState} from 'react';
 import axiosApi from "../../axiosApi";
+import {useNavigate, useParams} from "react-router-dom";
+import type {QuoteType} from "../../types";
 
 interface Props {
- existingQuote?: QuoteType;
+  existingQuote?: QuoteType;
 }
 
 const QuoteForm: React.FC<Props> = ({existingQuote}) => {
-
-
-
   const {id} = useParams();
   const navigate = useNavigate();
 
@@ -27,15 +22,14 @@ const QuoteForm: React.FC<Props> = ({existingQuote}) => {
 
   const [quote, setQuote] = useState<QuoteType>(initialState);
 
+  const onUserChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
+    const {name, value} = e.target;
 
-const onUserChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
-  const {name, value} = e.target;
-
-  setQuote((prev) => ({
-    ...prev,
-    [name]: value,
-  }));
-}
+    setQuote((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const onFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -55,7 +49,6 @@ const onUserChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement 
   };
 
   return (
-
     <form onSubmit={onFormSubmit} className="container-fluid">
       <h3>{existingQuote ? 'Edit quote:' : 'Submit new quote:'}</h3>
       <select
@@ -89,7 +82,11 @@ const onUserChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement 
         onChange={onUserChange}
         placeholder={"Enter quote:"}
       />
-      <button type="submit" className="btn btn-success w-25 mx-auto mb-2">{existingQuote ? 'Edit' : 'Add'}</button>
+      <button
+        type="submit"
+        className="btn btn-success w-25 mx-auto mb-2"
+      >
+        {existingQuote ? 'Edit' : 'Add'}</button>
     </form>
   );
 };

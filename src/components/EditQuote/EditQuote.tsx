@@ -1,21 +1,19 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
 import axiosApi from "../../axiosApi";
-import type {QuoteType} from "../../types";
-import Quote from "../Quote/Quote";
+import {useParams} from "react-router-dom";
 import QuoteForm from "../QuoteForm/QuoteForm";
+import type {QuoteType} from "../../types";
 
 const EditQuote = () => {
   const {id} = useParams();
   const [editedQuote, setEditedQuote] = useState<QuoteType | null>(null);
 
-  const fetchQuote =  useCallback(async (id: string) => {
+  const fetchQuote = useCallback(async (id: string) => {
     try {
       const response = await axiosApi.get<QuoteType>('/quotes/' + id + '.json');
       response.data.id = id;
       setEditedQuote(response.data)
-
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
   }, []);
