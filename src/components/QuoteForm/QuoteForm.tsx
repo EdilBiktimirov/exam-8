@@ -11,6 +11,8 @@ interface Props {
 
 const QuoteForm: React.FC<Props> = ({existingQuote}) => {
 
+
+
   const {id} = useParams();
   const navigate = useNavigate();
 
@@ -54,7 +56,8 @@ const onUserChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement 
 
   return (
 
-    <form onSubmit={onFormSubmit}>
+    <form onSubmit={onFormSubmit} className="container-fluid">
+      <h3>{existingQuote ? 'Edit quote:' : 'Submit new quote:'}</h3>
       <select
         className="form-select mb-2 w-75"
         id={"category"}
@@ -67,7 +70,7 @@ const onUserChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement 
         <option value={"famous-people"}>Famous People</option>
         <option value={"saying"}>Saying</option>
         <option value={"humour"}>Humour</option>
-        <option value={"motivational"}>motivational</option>
+        <option value={"motivational"}>Motivational</option>
       </select>
       <input
         className="form-control mb-2"
@@ -86,7 +89,7 @@ const onUserChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement 
         onChange={onUserChange}
         placeholder={"Enter quote:"}
       />
-      <button type="submit">Add</button>
+      <button type="submit" className="btn btn-success w-25 mx-auto mb-2">{existingQuote ? 'Edit' : 'Add'}</button>
     </form>
   );
 };
